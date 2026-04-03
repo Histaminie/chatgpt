@@ -1,0 +1,8 @@
+package com.example.expensetracker.ui.theme
+
+import androidx.compose.ui.graphics.Color
+
+val GreenPrimary = Color(0xFF2E7D32)
+val GreenSecondary = Color(0xFF66BB6A)
+val SurfaceLight = Color(0xFFF8FDF8)
+val SurfaceDark = Color(0xFF0F1A10)
