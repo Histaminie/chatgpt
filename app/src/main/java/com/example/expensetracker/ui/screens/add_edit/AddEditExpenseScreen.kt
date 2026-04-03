@@ -125,7 +125,7 @@ fun AddEditExpenseScreen(viewModel: ExpenseViewModel) {
     if (showDateDialog) {
         val pickerState = rememberDatePickerState(initialSelectedDateMillis = selectedTime)
         DatePickerDialog(
-            onDismissRequest = { showDateDialog = false },
+            onDismissRequest = { },
             confirmButton = {
                 TextButton(onClick = {
                     pickerState.selectedDateMillis?.let { millis ->
@@ -133,7 +133,6 @@ fun AddEditExpenseScreen(viewModel: ExpenseViewModel) {
                         val newDate = Instant.ofEpochMilli(millis).atZone(ZoneId.systemDefault()).toLocalDate()
                         selectedTime = LocalDateTime.of(newDate, old.toLocalTime()).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
                     }
-                    showDateDialog = false
                 }) { Text("OK") }
             }
         ) { DatePicker(state = pickerState) }
@@ -143,16 +142,15 @@ fun AddEditExpenseScreen(viewModel: ExpenseViewModel) {
         val current = Instant.ofEpochMilli(selectedTime).atZone(ZoneId.systemDefault()).toLocalTime()
         val timeState = rememberTimePickerState(initialHour = current.hour, initialMinute = current.minute)
         AlertDialog(
-            onDismissRequest = { showTimeDialog = false },
+            onDismissRequest = { },
             confirmButton = {
                 TextButton(onClick = {
                     val old = Instant.ofEpochMilli(selectedTime).atZone(ZoneId.systemDefault()).toLocalDate()
                     selectedTime = LocalDateTime.of(old, java.time.LocalTime.of(timeState.hour, timeState.minute))
                         .atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
-                    showTimeDialog = false
                 }) { Text("OK") }
             },
-            dismissButton = { TextButton(onClick = { showTimeDialog = false }) { Text("Cancel") } },
+            dismissButton = { TextButton(onClick = { }) { Text("Cancel") } },
             text = { TimeInput(state = timeState) }
         )
     }
